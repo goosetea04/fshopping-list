@@ -2,15 +2,8 @@
 
 A new Flutter project.
 
-## Getting Started
+## Assignment 7
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### What are the main differences between stateless and stateful widgets in Flutter?
+### Explain all widgets that you used in this assignment.
+### Explain how you implemented the checklist above step-by-step (not just following the tutorial).
