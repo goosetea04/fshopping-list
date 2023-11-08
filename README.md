@@ -38,7 +38,7 @@ The `Text` widget is placed within the 'AppBar.title' property to present the ap
 
 `InkWell` enables the card to respond to taps. When tapped, it displays a SnackBar containing the message.
 
-### main.dar:
+### main.dart:
 
 The `MaterialApp` widget serves as the main widget for the entire application. It encompasses all the necessary widgets and establishes the fundamental structure of the Flutter application. Additionally, note that `MaterialApp` implicitly generates a `Scaffold` as its child widget. A `Scaffold` provides a basic framework for a Flutter app, incorporating elements such as the app bar, body, and other common UI components.
 
