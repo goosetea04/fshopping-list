@@ -56,3 +56,5 @@ The `Title` widget employs the 'title' property to specify the title of the Flut
 - Next, after we run `git init`, we run `flutter create <APP_NAME>`. We then write `cd <APP_NAME>` then `flutter run` to come up with the barebones skeleton of our application.
 
 - Moving on, we then modify our `main.dart` and `menu.dart` to better reflect what is needed as the specification for our PBP assignment.
+
+- We then repeat the steps for the tutorial. We 
