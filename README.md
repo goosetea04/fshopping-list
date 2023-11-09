@@ -173,3 +173,5 @@ class ShopCard extends StatelessWidget {
 - Moving on, for the `main.dart` we first `package:flutter/material.dart` and `package:shoppinglist/menu.dart`. We then import all the required libraries for the `main.dart` and run it.
 
 - Finally, we can start our app by typing `flutter run` in terminal then pressing `2` for google chrome platform. 
+
+# Assignment 8
