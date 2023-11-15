@@ -229,6 +229,18 @@ A widget that centers its child, simplifying the alignment of inner widgets to t
 
 
 ## List the form input elements you used in this assignment and explain why you used these input elements!
+
+### Widgets Used
+
+- Form: The form widget allows us to bunch multiple TextFormFields into one form. from here we can display, validate, save and reset the form as needed.
+- TextFormField: A text field that allows users to input their responses into the form. here we can validate the response and save it as a string.
+
+### ELEMENTS
+
+- Name: Our store of course, needs to have items, so we will need to add the name of the item to our list.
+- Price: The price also needs to be recorded in our shopping store.
+- Description: so that users know what theu are getting, they need to know what the description of our object is.
+
 ## How is clean architecture implemented in a Flutter application?
 
 Clean Architecture in Flutter involves organizing code into layers: presentation, domain, and data. The presentation layer deals with UI components and delegates most logic to the domain layer, which houses business logic independently of the framework. Data management is handled by the data layer, interacting with external sources via repositories and data sources. Following the dependency rule, dependencies flow from outer to inner layers, maintaining a clear separation of concerns. Dependency injection is used for providing dependencies, promoting flexibility and testability. By defining interfaces and abstract classes, you establish contracts between layers, enhancing maintainability and scalability. This approach supports independent testing of each layer and facilitates adaptation to evolving application requirements.
