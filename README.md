@@ -251,7 +251,7 @@ In a practical scenario, a Flutter widget (presentation layer) utilizes a use ca
 
 ### Adding the form
 
-To begin, I created a Dart file called "inventory_form" to define a new page. Similar to our previous Flutter files, it imports from the "flutter/material.dart" package. In this file, I introduced a Stateful widget named "ShopFormPage," equipped with a constructor containing only "super.key", that is inherited from its parent class, and a private instance of "ShopFormPageState" as its state.
+To begin, I created a Dart file called 'inventory_form' to define a new page. Similar to our previous Flutter files, it imports from the "flutter/material.dart" package. In this file, I introduced a Stateful widget named "ShopFormPage," equipped with a constructor containing only "super.key", that is inherited from its parent class, and a private instance of "ShopFormPageState" as its state.
 
 Subsequently, I outlined the state for "ShopFormPage," incorporating a private attribute named "formKey" to handle the form state along with previously listed input elements (name, category, code, and description as Strings, and amount and price as integers). Following this, I proceeded to override the "build" method within the state, incorporating specific features and contents.
 
