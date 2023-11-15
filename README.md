@@ -260,3 +260,7 @@ Within the Form structure, there exists a Column incorporating a TextFormField f
 In the column nested within the Form, serving as the body of the Scaffold constructed when building this Widget, there is an ElevatedButton. This button is encapsulated by an Align widget, strategically positioning it at the bottom center. The button is labeled 'Save,' providing a clear and actionable indication of its purpose within the form.
 
 ### Adding the drawer
+
+to start, I made a new file called left_drawer.dart wherein I imported the necessary flutter/materials packages as well as HomePage and ShopFormPage. In this file, I made a new STATELESS WIDGET called LeftDrawer. The widget's constructor exclusively includes "super.key" without introducing any specific attributes. The overridden "build" method of this widget is designed to return a Drawer when built. Within the Drawer, a ListView is positioned as its child.
+
+I made sure that the drawer has the necessary features needed like the add item button, homepage and an indigo drawer header. for both buttons, i used Navigation.PushReplacement() to make sure that the page is how we need it to be.
