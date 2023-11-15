@@ -177,6 +177,22 @@ class ShopCard extends StatelessWidget {
 # Assignment 8
 
 ## Explain the difference between Navigator.push() and Navigator.pushReplacement(), accompanied by examples of the correct usage of both methods!
+
+In Flutter, both the `Navigator.push()` and `Navigator.pushReplacement()` methods are used to navigate between different screens (routes) in a mobile application. The primary difference lies in how they manage the navigation stack. `Navigator.push()` pushes a new screen on top of the old screen. This is beneficial since the mew screen can be seen as well as the old screen technically still being able to be seen and navigated to using a back button. This is suitable for scenarios where you want to maintain a history of screens, such as when moving from a list view to a detailed view. Here is an example:
+```
+Navigator.push(
+  context,
+  MaterialPageRoute(builder: (context) => SecondScreen()),
+);
+```
+On the opposite side, `Navigator.pushReplacement()` is used to replace the old screen with a new one. This would mean that the user is not able to navigate to it anymore. This is suitable for authentication screen like after logging out. The user will not be able to come back to a page they don't have acces to once they log out. Here is an example:
+```
+Navigator.pushReplacement(
+  context,
+  MaterialPageRoute(builder: (context) => HomeScreen()),
+);
+```
+
 ## Explain each layout widget in Flutter and their respective usage contexts!
 ## List the form input elements you used in this assignment and explain why you used these input elements!
 ## How is clean architecture implemented in a Flutter application?
