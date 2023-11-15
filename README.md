@@ -230,4 +230,9 @@ A widget that centers its child, simplifying the alignment of inner widgets to t
 
 ## List the form input elements you used in this assignment and explain why you used these input elements!
 ## How is clean architecture implemented in a Flutter application?
+
+Clean Architecture in Flutter involves organizing code into layers: presentation, domain, and data. The presentation layer deals with UI components and delegates most logic to the domain layer, which houses business logic independently of the framework. Data management is handled by the data layer, interacting with external sources via repositories and data sources. Following the dependency rule, dependencies flow from outer to inner layers, maintaining a clear separation of concerns. Dependency injection is used for providing dependencies, promoting flexibility and testability. By defining interfaces and abstract classes, you establish contracts between layers, enhancing maintainability and scalability. This approach supports independent testing of each layer and facilitates adaptation to evolving application requirements.
+
+In a practical scenario, a Flutter widget (presentation layer) utilizes a use case (domain layer) for executing business logic. This use case relies on a repository (data layer) to fetch data, with the repository implementation managing the specifics of data retrieval. This modular structure ensures a maintainable and scalable Flutter application, emphasizing testability and adaptability over time.
+
 ## Explain how you implemented the checklist above step-by-step! (not just following the tutorial)
