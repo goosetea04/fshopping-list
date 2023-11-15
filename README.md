@@ -254,3 +254,9 @@ In a practical scenario, a Flutter widget (presentation layer) utilizes a use ca
 To begin, I created a Dart file called "inventory_form" to define a new page. Similar to our previous Flutter files, it imports from the "flutter/material.dart" package. In this file, I introduced a Stateful widget named "ShopFormPage," equipped with a constructor containing only "super.key", that is inherited from its parent class, and a private instance of "ShopFormPageState" as its state.
 
 Subsequently, I outlined the state for "ShopFormPage," incorporating a private attribute named "formKey" to handle the form state along with previously listed input elements (name, category, code, and description as Strings, and amount and price as integers). Following this, I proceeded to override the "build" method within the state, incorporating specific features and contents.
+
+Within the Form structure, there exists a Column incorporating a TextFormField for each previously mentioned input element. These TextFormFields are appropriately labeled based on the corresponding attribute. They feature an onChange method that assigns the current content of the TextFormField to the relevant attribute (e.g., the TextFormField labeled "Card Name" modifies the "name" attribute of the "ShopFormPageState"). Additionally, the TextFormFields are equipped with validators that return errors if the field is empty or if the attribute is expected to be an integer, but the TextFormField content is non-numeric.
+
+In the column nested within the Form, serving as the body of the Scaffold constructed when building this Widget, there is an ElevatedButton. This button is encapsulated by an Align widget, strategically positioning it at the bottom center. The button is labeled 'Save,' providing a clear and actionable indication of its purpose within the form.
+
+### Adding the drawer
