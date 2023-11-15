@@ -175,3 +175,9 @@ class ShopCard extends StatelessWidget {
 - Finally, we can start our app by typing `flutter run` in terminal then pressing `2` for google chrome platform. 
 
 # Assignment 8
+
+## Explain the difference between Navigator.push() and Navigator.pushReplacement(), accompanied by examples of the correct usage of both methods!
+## Explain each layout widget in Flutter and their respective usage contexts!
+## List the form input elements you used in this assignment and explain why you used these input elements!
+## How is clean architecture implemented in a Flutter application?
+## Explain how you implemented the checklist above step-by-step! (not just following the tutorial)
