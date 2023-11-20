@@ -264,3 +264,25 @@ In the column nested within the Form, serving as the body of the Scaffold constr
 to start, I made a new file called left_drawer.dart wherein I imported the necessary flutter/materials packages as well as HomePage and ShopFormPage. In this file, I made a new STATELESS WIDGET called LeftDrawer. The widget's constructor exclusively includes "super.key" without introducing any specific attributes. The overridden "build" method of this widget is designed to return a Drawer when built. Within the Drawer, a ListView is positioned as its child.
 
 I made sure that the drawer has the necessary features needed like the add item button, homepage and an indigo drawer header. for both buttons, i used Navigation.PushReplacement() to make sure that the page is how we need it to be.
+
+## Assignment 9
+
+### Can we retrieve JSON data without creating a model first? If yes, is it better than creating a model before retrieving JSON data?
+
+While it is technically possible to retrieve JSON data in Flutter without creating a specific model first, doing so comes with trade-offs. Without a predefined model, the code lacks the benefits of static typing, making it susceptible to runtime errors if the JSON structure changes unexpectedly. This approach might be suitable for quick prototyping or scenarios where the JSON data is simple and doesn't require a formal structure. However, for more complex applications, creating a dedicated model class offers advantages in terms of type safety, code readability, and maintainability.
+
+Creating a model class allows you to define a structured representation of the JSON data, providing a clear contract between your Dart code and the expected data format. This enhances code organization and readability, making it easier for developers to understand and work with the data. Additionally, tools like `json_serializable` automate the serialization/deserialization process, reducing boilerplate code and ensuring that the Dart model aligns seamlessly with the JSON structure. Overall, while fetching JSON data without a model may be feasible in certain scenarios, employing models is generally considered a best practice for robust and maintainable Flutter applications.
+
+### Explain the function of CookieRequest and explain why a CookieRequest instance needs to be shared with all components in a Flutter application.
+
+
+
+### Explain the mechanism of fetching data from JSON until it can be displayed on Flutter.
+
+In the Flutter application, after fetching and parsing the JSON data, you can use Flutter widgets to display the information. If you have a list of items, you might use a `ListView.builder` to efficiently build a scrolling list. For example, if your JSON data represents a list of user profiles, you could iterate through the list and create a widget for each user, displaying their name, age, or any other relevant information. If you are dealing with a single object, you can directly access its properties and use them to populate Text or other widgets. For instance, you might display a user's name and age in a simple `Column` or `Row widget.
+
+Furthermore, you can incorporate state management solutions like `Provider` or `Bloc` to efficiently update the UI when the data changes. These patterns help in separating the UI from the data and managing the app's state in a more organized manner. By following these steps, you ensure that the JSON data is seamlessly integrated into your Flutter application, providing a dynamic and responsive user interface.
+
+### Explain the authentication mechanism from entering account data on Flutter to Django authentication completion and the display of menus on Flutter.
+### List all the widgets you used in this assignment and explain their respective functions.
+### Explain how you implement the checklist above step by step! (not just following the tutorial).
