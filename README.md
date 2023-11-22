@@ -293,4 +293,196 @@ In the Django backend, authentication includes verifying the provided username a
 Upon receiving the authentication response, the Flutter app adjusts its local state accordingly. Successful authentication leads to a transition to a menu display page through Flutter's navigation system, presenting various menus or features accessible to the authenticated user. Throughout this process, the implementation of secure communication practices, such as `HTTPS`, is crucial for data transmission security. Effective error handling and user feedback mechanisms ensure a seamless user experience, with error messages displayed when authentication encounters issues. The authentication mechanism orchestrates a coordinated data exchange between Flutter and Django, prioritizing the security and integrity of user account information.
 
 ### List all the widgets you used in this assignment and explain their respective functions.
+
+-Provider
+
+This widget is the one that is available in the `provider` package that is useful for knowing what the current state is. This is used to keep data to be used by `child` widgets. It allows for inheriting properties down to `child` widgets.
+
+- CookieRequest
+
+This is provided by the TAs in the `PBP` package. It allows us to store certain cookies that would be used to integrate with the Django assignment. 
+
+- FutureBuilder
+
+A wisget that enables the handling of asynchronous functions, such as data retrieval, by designating the function for the  future. It captures snapshots of the latest interaction with the function and utilizes them to construct or reconstruct the webpage. In this scenario, the snapshots encompass all items extracted from the response to the fetch request made to the Django project.
+
+- Gridview.Builder
+
+Similar to `GridView.count`, but this has a dynamic number of children that is able to change count of.
+
+- detail.dart
+
+This is the page that shows in depth details of objects in the `shoplist.dart`. It has all the fields associated with the Django assignment, namely, `name`, `price`, and `description`.
+  
 ### Explain how you implement the checklist above step by step! (not just following the tutorial).
+
+**Ensure the deployment of the Django assignment is running smoothly.**
+
+Currently it is not running smoothly, however I have expressed all my concerns to the TA and together, we are currently looking for a solution to fix it. There was a problem with a git folder with a white arrow howeverm I fixed it by running some scripts then pushing again.
+
+**Creating the login page in FLutter and integrating it with Django Assignment**
+
+First off, within my Django Project, I incorporated an app named `corsheaders`. I configured the `settings.py` file to recognize it as an installed app by adding it into `INSTALLED_APPS`, I then included its associated middleware in the `Middleware` list in settings.py, and added all the necessary constants for `corsheaders` to function according to the requirements in `settings.py`. Subsequently, I established an `authentication` app using the command `python manage.py startapp authentication`. In this app, I defined `login` and `logout` functions that operate similarly to those in the previous assignments, with the distinction that they interpret the request differently now, they interpret requests as `request.POST['data']`. Instead of returning an `HttpResponseRedirect`, they now return a `JSONResponse` containing all the information required by our Flutter app, such as the success status, message, and the username of the user in the case of a successful login. Tehn, in the `authentication` application, I created a `urls.py` file, set up routing paths in   `urls.py` to the functions in the views.py of the authentication app, and added a path that includes the authentication   `urls.py` in the project directory.
+
+Moving on to a new file named `login.dart`, I crafted a stateful widget called `LoginApp`, with an instance of `_LoginPageState` as its state. The `_LoginPageState` widget includes final (unchanging) variables of type TextEditingController to track the contents of the TextFields where users input their data, namely _usernameController and _passwordController. Additionally, within the build function, there is a request variable of the CookieRequest class, which tracks cookies and enables sending HTTP requests to our Django project.
+
+In the `_LoginPageState` widget, We override the Build method. On build, it creates a `Scaffold` with an `Appbar`, and its body, which is the main body visible on the webpage, is a Container (used for padding) with a child of the Column class (used for positioning and storing a list of children widgets displayed below one another). The Column class includes the following children:
+
+- `TextField` with `_usernameController` as its controller and InputDecoration indicating that this field is for "Username."
+- A `TextField` with `_passwordController` as its controller and InputDecoration stating that this field is for "Password."
+- An `ElevatedButton` with the text "Login" that, when clicked, fetches the contents of the text fields by accessing the text attribute of the controllers. It then awaits a request to the Django project using the request CookieRequest, routed to the login function in the `authentication` app, which attempts to log in to the application. If successful, some session data is stored in the request `CookieRequest`, and the user is navigated to the HomePage of the app.
+
+Essentially what the login does is after integrating with django, the process of logging in occurs in the Django app within `authentication`. The flutter app acts as a frontend and to display to the user responses gotten from the Django app.
+
+**Create a custom model according to your Django application project.**
+
+I first ran `localhost:8000/json` that displays the serialised version of JSON that is in my `Django` project. I then went onto https://app.QuickType.io. i then copy pasted the JSON response I got into the site to get the necessary code to put in JSON. I then made a new folder in `lib` called `models` and there added a .dart file called `product.dart` I then copy pasted it into the models and did not change any fields since all the fields necessary are the same as my Django file.
+
+**Create a page containing a list of all items available at the JSON endpoint in Django that you have deployed.**
+
+In a new file called `list_product.dart`, I create a StatefulWidget named ItemPage, assigning an instance of `_ProductPageState` as its state. Subsequently, I define the `ProductPageState`, incorporating a Future List of Items that gets updated by the outcome of an asynchronous function named fetchData. This fetchData function utilizes the request CookieRequest to dispatch a request to the Django Project, intending it to be routed to the `show_json` function, and extracts the `JSON` from the response. For each item within the `JSON`, the function employs the serialization logic derived from the Item model to transform the JSON into an object of type Item. Subsequently, the item is added to a list. The fetchData function concludes by returning this list.
+
+**Create a detail page for each item listed on the Item list page.**
+
+I made a new file called `detail.dart`, there, I added the following code:
+
+```
+import 'package:flutter/material.dart';
+import 'package:shoppinglist/models/product.dart';
+import 'package:shoppinglist/widgets/left_drawer.dart';
+
+class ProductDetailPage extends StatelessWidget {
+  final Product product;
+
+  const ProductDetailPage({Key? key, required this.product}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('product Details'),
+        backgroundColor: Colors.indigo,
+        foregroundColor: Colors.white,
+      ),
+      drawer: const LeftDrawer(),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              product.fields.name,
+              style: const TextStyle(
+                fontSize: 24.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 10),
+            Text("Price: ${product.fields.price}"),
+            const SizedBox(height: 10),
+            Text("Description: ${product.fields.description}"),
+            const SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(
+                    context); // Navigate back to the product list page
+              },
+              child: const Text('Back to product List'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+```
+There are some notable things to take note of.
+
+```
+children: [
+            Text(
+              product.fields.name,
+              style: const TextStyle(
+                fontSize: 24.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 10),
+            Text("Price: ${product.fields.price}"),
+            const SizedBox(height: 10),
+            Text("Description: ${product.fields.description}"),
+            const SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(
+                    context); // Navigate back to the product list page
+              },
+              child: const Text('Back to product List'),
+            ),
+```
+This is basically the contents of the site where It displays the necessary fields `name`, `price` and `description` as well as an `ElevatedButton` to bring me back to the `list_product.dart` page.
+
+In `list_product.dart`, we add the following code:
+
+```
+InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ProductDetailPage(
+                                        product: snapshot.data![index])));
+                          },
+```
+Here, we add an `InkWell` that has an `onTap` function. For the function, we push the `ProductDetailPage` to be shown to the user.
+
+***Bonus 1* Showing list only for that specific user**
+
+To do this, the steps are simple.
+
+In the Django app, we modify the `show_json` function in `main/views` as such:
+
+```
+def show_json(request):
+    data = Product.objects.filter(user=request.user)
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+```
+Here we send JSON files based on the id of the user so it is only their items that get sent.
+
+Next in Flutter, we modify `shoplist_form.dart` as such:
+
+```
+Future<List<Product>> fetchProduct() async {
+    final request = context.watch<CookieRequest>();
+    // TODO: Change the URL to your Django app's URL. Don't forget to add the trailing slash (/) if needed.
+    var url = Uri.parse('http://127.0.0.1:8000/json/');
+    var response = await http.get(
+      url,
+      headers: {"Content-Type": "application/json"},
+    );
+
+    // decode the response to JSON
+    // var data = jsonDecode(utf8.decode(response.bodyBytes));
+
+    final data = await request.get('http://127.0.0.1:8000/json/');
+
+    // convert the JSON to Product object
+    List<Product> list_product = [];
+    for (var d in data) {
+      if (d != null) {
+        list_product.add(Product.fromJson(d));
+      }
+    }
+    return list_product;
+  }
+```
+
+We create a `Future` that will differ based on the number of items a user has. It waits for response from the django's json represented by `data`. for each item, it will make a card. 
+
+Don't forget to add the necessary imports at the top of the file.
+
+```
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
+```
+
