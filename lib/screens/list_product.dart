@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:shoppinglist/models/product.dart';
 import 'package:shoppinglist/widgets/left_drawer.dart';
+import 'package:shoppinglist/screens/detail.dart';
 
 class ProductPage extends StatefulWidget {
   const ProductPage({Key? key}) : super(key: key);
@@ -60,7 +61,15 @@ class _ProductPageState extends State<ProductPage> {
                 } else {
                   return ListView.builder(
                       itemCount: snapshot.data!.length,
-                      itemBuilder: (_, index) => Container(
+                      itemBuilder: (_, index) => InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ProductDetailPage(
+                                        product: snapshot.data![index])));
+                          },
+                          child: Container(
                             margin: const EdgeInsets.symmetric(
                                 horizontal: 16, vertical: 12),
                             padding: const EdgeInsets.all(20.0),
@@ -85,7 +94,7 @@ class _ProductPageState extends State<ProductPage> {
                                     "${snapshot.data![index].fields.dateAdded}")
                               ],
                             ),
-                          ));
+                          )));
                 }
               }
             }));

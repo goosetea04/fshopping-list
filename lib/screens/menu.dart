@@ -6,9 +6,9 @@ class MyHomePage extends StatelessWidget {
   MyHomePage({Key? key}) : super(key: key);
 
   final List<ShopItem> items = [
-    ShopItem("View Products", Icons.checklist),
-    ShopItem("Add Product", Icons.add_shopping_cart),
-    ShopItem("Logout", Icons.logout),
+    ShopItem("View Products", Icons.checklist, Colors.yellow),
+    ShopItem("Add Product", Icons.add_shopping_cart, Colors.orange),
+    ShopItem("Logout", Icons.logout, Colors.blue),
   ];
 
   // This widget is the home page of your application. It is stateful, meaning

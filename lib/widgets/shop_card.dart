@@ -8,8 +8,9 @@ import 'package:shoppinglist/screens/login.dart';
 class ShopItem {
   final String name;
   final IconData icon;
+  final Color color;
 
-  ShopItem(this.name, this.icon);
+  ShopItem(this.name, this.icon, this.color);
 }
 
 class ShopCard extends StatelessWidget {
@@ -21,7 +22,7 @@ class ShopCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
     return Material(
-      color: Colors.indigo,
+      color: item.color,
       child: InkWell(
         // Responsive touch area
         onTap: () async {
