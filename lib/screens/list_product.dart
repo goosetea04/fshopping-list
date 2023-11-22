@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import 'dart:convert';
 import 'package:shoppinglist/models/product.dart';
 import 'package:shoppinglist/widgets/left_drawer.dart';
 import 'package:shoppinglist/screens/detail.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
 
 class ProductPage extends StatefulWidget {
   const ProductPage({Key? key}) : super(key: key);
@@ -14,6 +16,7 @@ class ProductPage extends StatefulWidget {
 
 class _ProductPageState extends State<ProductPage> {
   Future<List<Product>> fetchProduct() async {
+    final request = context.watch<CookieRequest>();
     // TODO: Change the URL to your Django app's URL. Don't forget to add the trailing slash (/) if needed.
     var url = Uri.parse('http://127.0.0.1:8000/json/');
     var response = await http.get(
@@ -22,7 +25,9 @@ class _ProductPageState extends State<ProductPage> {
     );
 
     // decode the response to JSON
-    var data = jsonDecode(utf8.decode(response.bodyBytes));
+    // var data = jsonDecode(utf8.decode(response.bodyBytes));
+
+    final data = await request.get('http://127.0.0.1:8000/json/');
 
     // convert the JSON to Product object
     List<Product> list_product = [];
